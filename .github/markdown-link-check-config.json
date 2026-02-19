@@ -1,7 +1,10 @@
 {
   "ignorePatterns": [
     { "pattern": "^https://tally\\.so/" },
-    { "pattern": "^https://console\\.cloud\\.google\\.com/" }
+    { "pattern": "^https://console\\.cloud\\.google\\.com/" },
+    { "pattern": "^https://smithery\\.ai/" },
+    { "pattern": "^https://crates\\.io/crates/" },
+    { "pattern": "^https://www\\.npmjs\\.com/package/" }
   ],
   "retryOn429": true,
   "retryCount": 3,
