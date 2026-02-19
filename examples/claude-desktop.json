@@ -1,0 +1,13 @@
+{
+  "_comment": "Claude Desktop MCP configuration. See docs/google-cloud-setup.md for getting OAuth credentials.",
+  "mcpServers": {
+    "temporal-cortex": {
+      "command": "npx",
+      "args": ["-y", "@temporal-cortex/cortex-mcp"],
+      "env": {
+        "GOOGLE_CLIENT_ID": "your-client-id.apps.googleusercontent.com",
+        "GOOGLE_CLIENT_SECRET": "your-client-secret"
+      }
+    }
+  }
+}

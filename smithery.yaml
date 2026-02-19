@@ -1,0 +1,36 @@
+# Smithery directory configuration for Temporal Cortex MCP Server.
+# This file is auto-discovered by smithery.ai when this repo is submitted.
+# See: https://smithery.ai/docs/publishing
+
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties:
+      google_client_id:
+        type: string
+        description: Google OAuth2 Client ID for Calendar API access
+      google_client_secret:
+        type: string
+        description: Google OAuth2 Client Secret
+      tenant_id:
+        type: string
+        description: Optional UUID for tenant isolation
+      lock_ttl_secs:
+        type: number
+        description: Lock timeout in seconds (default 30)
+        default: 30
+    required:
+      - google_client_id
+      - google_client_secret
+  commandFunction: |-
+    (config) => ({
+      command: 'npx',
+      args: ['-y', '@temporal-cortex/cortex-mcp'],
+      env: {
+        GOOGLE_CLIENT_ID: config.google_client_id,
+        GOOGLE_CLIENT_SECRET: config.google_client_secret,
+        ...(config.tenant_id && { TENANT_ID: config.tenant_id }),
+        ...(config.lock_ttl_secs && { LOCK_TTL_SECS: String(config.lock_ttl_secs) }),
+      },
+    })
