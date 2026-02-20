@@ -9,17 +9,26 @@ startCommand:
     properties:
       google_client_id:
         type: string
+        title: Google Client ID
         description: Google OAuth2 Client ID for Calendar API access
       google_client_secret:
         type: string
+        title: Google Client Secret
         description: Google OAuth2 Client Secret
       tenant_id:
         type: string
+        title: Tenant ID
         description: Optional UUID for tenant isolation
       lock_ttl_secs:
         type: number
+        title: Lock TTL (seconds)
         description: Lock timeout in seconds (default 30)
         default: 30
+      oauth_redirect_port:
+        type: number
+        title: OAuth Redirect Port
+        description: Port for local OAuth callback server (default 8085)
+        default: 8085
     required:
       - google_client_id
       - google_client_secret
@@ -32,5 +41,9 @@ startCommand:
         GOOGLE_CLIENT_SECRET: config.google_client_secret,
         ...(config.tenant_id && { TENANT_ID: config.tenant_id }),
         ...(config.lock_ttl_secs && { LOCK_TTL_SECS: String(config.lock_ttl_secs) }),
+        ...(config.oauth_redirect_port && { OAUTH_REDIRECT_PORT: String(config.oauth_redirect_port) }),
       },
     })
+  exampleConfig:
+    google_client_id: "your-client-id.apps.googleusercontent.com"
+    google_client_secret: "your-client-secret"

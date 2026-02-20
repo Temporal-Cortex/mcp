@@ -20,12 +20,34 @@
         {
           "name": "GOOGLE_CLIENT_ID",
           "description": "Google OAuth Client ID from Google Cloud Console",
-          "required": true
+          "isRequired": true,
+          "isSecret": false
         },
         {
           "name": "GOOGLE_CLIENT_SECRET",
           "description": "Google OAuth Client Secret",
-          "required": true
+          "isRequired": true,
+          "isSecret": true
+        },
+        {
+          "name": "TENANT_ID",
+          "description": "UUID for tenant isolation (auto-generated if not set)",
+          "isRequired": false,
+          "isSecret": false
+        },
+        {
+          "name": "LOCK_TTL_SECS",
+          "description": "Lock time-to-live in seconds for booking safety",
+          "isRequired": false,
+          "isSecret": false,
+          "default": "30"
+        },
+        {
+          "name": "OAUTH_REDIRECT_PORT",
+          "description": "Port for the local OAuth callback server",
+          "isRequired": false,
+          "isSecret": false,
+          "default": "8085"
         }
       ]
     }
