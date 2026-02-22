@@ -4,6 +4,7 @@
 
 | Version | Supported |
 |---------|-----------|
+| 0.2.x   | Yes       |
 | 0.1.x   | Yes       |
 
 ## Reporting a Vulnerability
@@ -27,3 +28,4 @@ This policy covers the following packages:
 - `@temporal-cortex/cortex-mcp-linux-x64`
 - `@temporal-cortex/cortex-mcp-linux-arm64`
 - `@temporal-cortex/cortex-mcp-win32-x64`
+- Docker image built from this repository's `Dockerfile`

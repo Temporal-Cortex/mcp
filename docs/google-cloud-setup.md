@@ -92,6 +92,16 @@ Run the auth command to complete the OAuth flow:
 npx @temporal-cortex/cortex-mcp auth
 ```
 
+**Docker alternative:**
+
+```bash
+docker run --rm -it \
+  -e GOOGLE_CLIENT_ID="your-id" -e GOOGLE_CLIENT_SECRET="your-secret" \
+  -p 8085:8085 \
+  -v ~/.config/temporal-cortex:/root/.config/temporal-cortex \
+  cortex-mcp auth
+```
+
 This will:
 1. Start a temporary local server on port 8085
 2. Open your browser for Google OAuth consent

@@ -27,7 +27,7 @@ Every other Calendar MCP server is a thin CRUD wrapper that passes these failure
 
 ## Prerequisites
 
-- **Node.js 18+** (for `npx` to download and run the binary)
+- **Node.js 18+** (for `npx` to download and run the binary) or **Docker**
 - **At least one calendar provider**:
   - **Google Calendar** — requires [Google OAuth credentials](docs/google-cloud-setup.md)
   - **Microsoft Outlook** — requires Azure AD app registration (`MICROSOFT_CLIENT_ID`)
@@ -95,6 +95,19 @@ Add to Windsurf's MCP config (`~/.codeium/windsurf/mcp_config.json`):
 }
 ```
 
+### Docker
+
+```bash
+docker run --rm -i \
+  -e GOOGLE_CLIENT_ID="your-client-id.apps.googleusercontent.com" \
+  -e GOOGLE_CLIENT_SECRET="your-client-secret" \
+  -e TIMEZONE="America/New_York" \
+  -v ~/.config/temporal-cortex:/root/.config/temporal-cortex \
+  cortex-mcp
+```
+
+Build the image first: `docker build -t cortex-mcp .` (or build directly from the repo: `docker build -t cortex-mcp https://github.com/billylui/temporal-cortex-mcp.git`).
+
 > **Need Google OAuth credentials?** See [docs/google-cloud-setup.md](docs/google-cloud-setup.md) for a step-by-step guide. For Outlook, add `MICROSOFT_CLIENT_ID`. For CalDAV (iCloud/Fastmail), no env vars needed — run `auth caldav` and enter your app-specific password.
 
 ## First-Time Setup
@@ -110,6 +123,13 @@ npx @temporal-cortex/cortex-mcp auth outlook
 
 # CalDAV (iCloud, Fastmail, or custom server)
 npx @temporal-cortex/cortex-mcp auth caldav
+
+# Docker (interactive auth — needs terminal + browser)
+docker run --rm -it \
+  -e GOOGLE_CLIENT_ID="your-id" -e GOOGLE_CLIENT_SECRET="your-secret" \
+  -p 8085:8085 \
+  -v ~/.config/temporal-cortex:/root/.config/temporal-cortex \
+  cortex-mcp auth google
 ```
 
 Each auth flow saves credentials to `~/.config/temporal-cortex/credentials.json` and registers the provider in `~/.config/temporal-cortex/config.json`. You can connect multiple providers — the server discovers all configured providers on startup and merges their calendars into a unified view.
@@ -187,7 +207,7 @@ Truth Engine handles all of these deterministically using the [RFC 5545](https:/
 
 ## How It Works
 
-The MCP server is a single Rust binary distributed via npm. It runs locally on your machine and communicates with MCP clients over stdio (standard input/output) or streamable HTTP.
+The MCP server is a single Rust binary distributed via npm and Docker. It runs locally on your machine and communicates with MCP clients over stdio (standard input/output) or streamable HTTP.
 
 - **Truth Engine** handles all date/time computation: temporal resolution, timezone conversion, RRULE expansion, availability merging, conflict detection. Deterministic, not inference-based.
 - **TOON** (Token-Oriented Object Notation) compresses calendar data for LLM consumption — fewer tokens, same information.

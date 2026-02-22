@@ -60,6 +60,17 @@ The binary is distributed via npm as `@temporal-cortex/cortex-mcp`. When you run
 
 This means no Rust toolchain is required — `npx` handles everything.
 
+### Docker
+
+A Docker image is also available for containerized deployments and CI pipelines:
+
+```bash
+docker build -t cortex-mcp https://github.com/billylui/temporal-cortex-mcp.git
+docker run --rm -i cortex-mcp
+```
+
+The Dockerfile uses a multi-stage build: the first stage installs the npm package to extract the platform binary, and the final image is a minimal Debian Trixie slim with just the binary and CA certificates. No Node.js runtime is included in the final image.
+
 ## Key Components
 
 ### Truth Engine

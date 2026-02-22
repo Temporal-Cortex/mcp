@@ -51,7 +51,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Deterministic RRULE expansion via Truth Engine (DST-aware, BYSETPOS, leap years)
 - RRULE Challenge CLI command for demonstrating edge case handling
 
-[Unreleased]: https://github.com/billylui/temporal-cortex-mcp/compare/mcp-v0.2.1...HEAD
-[0.2.1]: https://github.com/billylui/temporal-cortex-mcp/compare/mcp-v0.2.0...mcp-v0.2.1
-[0.2.0]: https://github.com/billylui/temporal-cortex-mcp/compare/mcp-v0.1.1...mcp-v0.2.0
-[0.1.1]: https://github.com/billylui/temporal-cortex-mcp/releases/tag/mcp-v0.1.1
+[Unreleased]: https://github.com/billylui/temporal-cortex-mcp/compare/v0.2.1...HEAD
+[0.2.1]: https://github.com/billylui/temporal-cortex-mcp/compare/v0.2.0...v0.2.1
+[0.2.0]: https://github.com/billylui/temporal-cortex-mcp/compare/v0.1.1...v0.2.0
+[0.1.1]: https://github.com/billylui/temporal-cortex-mcp/releases/tag/v0.1.1
