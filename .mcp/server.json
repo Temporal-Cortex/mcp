@@ -19,15 +19,21 @@
       "environmentVariables": [
         {
           "name": "GOOGLE_CLIENT_ID",
-          "description": "Google OAuth Client ID from Google Cloud Console",
-          "isRequired": true,
+          "description": "Google OAuth Client ID (required for Google Calendar)",
+          "isRequired": false,
           "isSecret": false
         },
         {
           "name": "GOOGLE_CLIENT_SECRET",
           "description": "Google OAuth Client Secret",
-          "isRequired": true,
+          "isRequired": false,
           "isSecret": true
+        },
+        {
+          "name": "MICROSOFT_CLIENT_ID",
+          "description": "Azure AD app ID (required for Outlook Calendar)",
+          "isRequired": false,
+          "isSecret": false
         },
         {
           "name": "TIMEZONE",

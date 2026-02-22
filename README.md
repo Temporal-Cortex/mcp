@@ -28,8 +28,10 @@ Every other Calendar MCP server is a thin CRUD wrapper that passes these failure
 ## Prerequisites
 
 - **Node.js 18+** (for `npx` to download and run the binary)
-- **Google account** with Google Calendar
-- **Google OAuth credentials** — [setup guide](docs/google-cloud-setup.md)
+- **At least one calendar provider**:
+  - **Google Calendar** — requires [Google OAuth credentials](docs/google-cloud-setup.md)
+  - **Microsoft Outlook** — requires Azure AD app registration (`MICROSOFT_CLIENT_ID`)
+  - **CalDAV** (iCloud, Fastmail, etc.) — requires an app-specific password
 
 ## Quick Start
 
@@ -93,19 +95,24 @@ Add to Windsurf's MCP config (`~/.codeium/windsurf/mcp_config.json`):
 }
 ```
 
-> **Need Google OAuth credentials?** See [docs/google-cloud-setup.md](docs/google-cloud-setup.md) for a step-by-step guide.
+> **Need Google OAuth credentials?** See [docs/google-cloud-setup.md](docs/google-cloud-setup.md) for a step-by-step guide. For Outlook, add `MICROSOFT_CLIENT_ID`. For CalDAV (iCloud/Fastmail), no env vars needed — run `auth caldav` and enter your app-specific password.
 
 ## First-Time Setup
 
-On first run, the server needs Google Calendar access. You have two options:
+On first run, the server needs calendar provider credentials. Run the auth flow for each provider you want to connect:
 
-**Option A** — Run auth before connecting:
 ```bash
-npx @temporal-cortex/cortex-mcp auth
-```
-This opens your browser for Google OAuth consent. After authorizing, credentials are saved to `~/.config/temporal-cortex/credentials.json` and reused automatically.
+# Google Calendar (default)
+npx @temporal-cortex/cortex-mcp auth google
 
-**Option B** — The server prompts automatically when an MCP client connects and no credentials are found.
+# Microsoft Outlook
+npx @temporal-cortex/cortex-mcp auth outlook
+
+# CalDAV (iCloud, Fastmail, or custom server)
+npx @temporal-cortex/cortex-mcp auth caldav
+```
+
+Each auth flow saves credentials to `~/.config/temporal-cortex/credentials.json` and registers the provider in `~/.config/temporal-cortex/config.json`. You can connect multiple providers — the server discovers all configured providers on startup and merges their calendars into a unified view.
 
 During auth, the server detects your system timezone and prompts you to confirm or override it, then asks for your preferred week start day (Monday or Sunday). Both are stored in `~/.config/temporal-cortex/config.json` and used by all temporal tools. You can override them per-session with the `TIMEZONE` and `WEEK_START` env vars.
 
@@ -127,8 +134,8 @@ After authentication, verify it works by asking your AI assistant: *"What time i
 
 | Tool | Description |
 |------|-------------|
-| `list_events` | List calendar events in a time range. Output in TOON (~40% fewer tokens) or JSON. |
-| `find_free_slots` | Find available time slots in a calendar. Computes actual gaps between events. |
+| `list_events` | List calendar events in a time range. Supports provider-prefixed IDs (`google/primary`). Output in TOON (~40% fewer tokens) or JSON. |
+| `find_free_slots` | Find available time slots in a calendar. Supports provider-prefixed IDs. Computes actual gaps between events. |
 | `expand_rrule` | Expand recurrence rules into concrete instances. Handles DST, BYSETPOS, leap years. |
 | `check_availability` | Check if a specific time slot is available against events and active locks. |
 
@@ -198,23 +205,24 @@ Transport mode is auto-detected — set `HTTP_PORT` to switch from stdio to HTTP
 HTTP_PORT=8009 npx @temporal-cortex/cortex-mcp
 ```
 
-### Lite Mode vs Full Mode
+### Local Mode vs Platform Mode
 
 Mode is auto-detected — there is no configuration flag.
 
-- **Lite Mode** (default): No infrastructure required. Uses in-memory locking and local file credential storage. Designed for individual developers with a single Google Calendar account.
-- **Full Mode** (activated when `REDIS_URLS` is set): Uses Redis-based distributed locking (Redlock) for multi-process safety. Designed for production deployments with multiple concurrent agents.
+- **Local Mode** (default): No infrastructure required. Uses in-memory locking and local file credential storage. Supports multiple calendar providers (Google, Outlook, CalDAV) with multi-calendar availability merging. Designed for individual developers.
+- **Platform Mode** (activated when `REDIS_URLS` is set): Uses Redis-based distributed locking (Redlock) for multi-process safety. Designed for production deployments with multiple concurrent agents.
 
 ## Configuration
 
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
-| `GOOGLE_CLIENT_ID` | Yes* | — | Google OAuth Client ID from [Cloud Console](https://console.cloud.google.com/apis/credentials) |
-| `GOOGLE_CLIENT_SECRET` | Yes* | — | Google OAuth Client Secret |
+| `GOOGLE_CLIENT_ID` | For Google | — | Google OAuth Client ID from [Cloud Console](https://console.cloud.google.com/apis/credentials) |
+| `GOOGLE_CLIENT_SECRET` | For Google | — | Google OAuth Client Secret |
 | `GOOGLE_OAUTH_CREDENTIALS` | No | — | Path to Google OAuth JSON credentials file (alternative to `CLIENT_ID` + `CLIENT_SECRET`) |
+| `MICROSOFT_CLIENT_ID` | For Outlook | — | Azure AD application (client) ID for Outlook calendar access |
 | `TIMEZONE` | No | auto-detected | IANA timezone override (e.g., `America/New_York`). Overrides stored config and OS detection. |
 | `WEEK_START` | No | `monday` | Week start day: `monday` (ISO 8601) or `sunday`. Affects "start of week", "next week", etc. |
-| `REDIS_URLS` | No | — | Comma-separated Redis URLs. When set, activates Full Mode with distributed locking. |
+| `REDIS_URLS` | No | — | Comma-separated Redis URLs. When set, activates Platform Mode with distributed locking. |
 | `TENANT_ID` | No | auto-generated | UUID for tenant isolation |
 | `LOCK_TTL_SECS` | No | `30` | Lock time-to-live in seconds |
 | `OAUTH_REDIRECT_PORT` | No | `8085` | Port for the local OAuth callback server |
@@ -222,29 +230,28 @@ Mode is auto-detected — there is no configuration flag.
 | `HTTP_HOST` | No | `127.0.0.1` | Bind address for HTTP transport. Use `0.0.0.0` only behind a reverse proxy. |
 | `ALLOWED_ORIGINS` | No | — | Comma-separated allowed Origin headers for HTTP mode (e.g., `http://localhost:3000`). All cross-origin requests rejected if unset. |
 
-\* Either `GOOGLE_CLIENT_ID` + `GOOGLE_CLIENT_SECRET`, or `GOOGLE_OAUTH_CREDENTIALS` must be set.
-
-See [docs/google-cloud-setup.md](docs/google-cloud-setup.md) for a complete setup guide.
+At least one calendar provider must be configured. See [docs/google-cloud-setup.md](docs/google-cloud-setup.md) for Google setup. CalDAV providers (iCloud, Fastmail) use app-specific passwords configured via `cortex-mcp auth caldav`.
 
 ## Troubleshooting
 
 | Problem | Solution |
 |---------|----------|
-| "No credentials found" | Run `npx @temporal-cortex/cortex-mcp auth` to authenticate with Google |
-| OAuth error / "Access blocked" | Verify `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` are correct. Ensure the OAuth consent screen is configured in [Google Cloud Console](https://console.cloud.google.com/apis/credentials/consent). |
+| "No credentials found" | Run `npx @temporal-cortex/cortex-mcp auth google` (or `outlook` / `caldav`) to authenticate |
+| OAuth error / "Access blocked" | Verify `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` (or `MICROSOFT_CLIENT_ID` for Outlook) are correct. Ensure the OAuth consent screen is configured. |
 | Port 8085 already in use | Set `OAUTH_REDIRECT_PORT` to a different port (e.g., `8086`) |
 | Server not appearing in MCP client | Ensure Node.js 18+ is installed (`node --version`). Check your MCP client's logs for errors. |
+| Provider not discovered on startup | Verify the provider is registered in `~/.config/temporal-cortex/config.json` (run `auth` again if needed) |
 
-See [docs/google-cloud-setup.md](docs/google-cloud-setup.md) for detailed OAuth troubleshooting.
+See [docs/google-cloud-setup.md](docs/google-cloud-setup.md) for detailed Google OAuth troubleshooting.
 
 ## Ready for More?
 
-The open-source MCP server gives you full calendar intelligence for your agent. When you're ready for more:
+The open-source MCP server gives you full multi-calendar intelligence: connect Google, Outlook, and CalDAV simultaneously, with unified availability merging and conflict-free booking. When you're ready for more:
 
-**Managed Cloud (Free)** — Zero-setup hosting with managed OAuth, dashboard UI, and multi-calendar support across Google, Outlook, and iCloud. Up to 3 connected calendars, 50 bookings/month, all 11 tools.
+**Managed Cloud (Free)** — Zero-setup hosting with managed OAuth and dashboard UI. Up to 3 connected calendars, 50 bookings/month, all 11 tools.
 → [Sign up for early access](https://tally.so/r/aQ66W2)
 
-**Open Scheduling (Pro)** — Let external agents and people book time with you. Shareable availability, inbound booking API, atomic Two-Phase Commit booking, caller-based policies, and unlimited calendar connections.
+**Open Scheduling (Pro)** — Let external agents and people book time with you. Shareable availability, inbound booking API, caller-based policies, and unlimited calendar connections.
 → [Request Early Access](https://tally.so/r/aQ66W2)
 
 **Enterprise** — Self-hosted platform deployment, SSO/SAML, audit log export, data residency, and compliance documentation.
