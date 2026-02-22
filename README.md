@@ -134,7 +134,12 @@ docker run --rm -it \
 
 Each auth flow saves credentials to `~/.config/temporal-cortex/credentials.json` and registers the provider in `~/.config/temporal-cortex/config.json`. You can connect multiple providers — the server discovers all configured providers on startup and merges their calendars into a unified view.
 
-During auth, the server detects your system timezone and prompts you to confirm or override it, then asks for your preferred week start day (Monday or Sunday). Both are stored in `~/.config/temporal-cortex/config.json` and used by all temporal tools. You can override them per-session with the `TIMEZONE` and `WEEK_START` env vars.
+During auth, the server guides you through interactive setup:
+- **Timezone** — auto-detects your system timezone and opens a fuzzy-search picker with all 597 IANA timezones (type to filter, arrow keys to navigate)
+- **Week start** — arrow-key selection between Monday (ISO standard) and Sunday
+- **Telemetry** — optional anonymous usage data (default: off)
+
+All preferences are stored in `~/.config/temporal-cortex/config.json` and used by all temporal tools. You can override them per-session with the `TIMEZONE` and `WEEK_START` env vars.
 
 After authentication, verify it works by asking your AI assistant: *"What time is it?"* — the agent should call `get_temporal_context` and return your current local time.
 
@@ -266,11 +271,11 @@ See [docs/google-cloud-setup.md](docs/google-cloud-setup.md) for detailed Google
 
 ## Telemetry
 
-Temporal Cortex collects anonymous tool usage data to help improve the product.
+We'd love your help making Temporal Cortex better! During setup, an interactive prompt asks if you'd like to share anonymous usage data (default: off).
 
-**Collected:** tool names, success/error status, platform, version. **Not collected:** calendar data, event content, personal information.
+**Collected:** tool names, success/error counts, platform, version. **Never collected:** calendar data, events, or personal info.
 
-On first run, an interactive prompt asks for opt-in consent (default: off). Non-interactive sessions auto-opt-out. Disable anytime:
+Non-interactive sessions (MCP stdio) auto-opt-out. Change your choice anytime:
 
 ```bash
 export TEMPORAL_CORTEX_TELEMETRY=off
