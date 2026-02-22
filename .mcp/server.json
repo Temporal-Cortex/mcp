@@ -86,6 +86,12 @@
           "description": "Comma-separated allowed Origin headers for HTTP mode. Cross-origin requests rejected if unset.",
           "isRequired": false,
           "isSecret": false
+        },
+        {
+          "name": "TEMPORAL_CORTEX_TELEMETRY",
+          "description": "Override telemetry consent: 'off' to disable, 'on' to enable anonymous usage analytics.",
+          "isRequired": false,
+          "isSecret": false
         }
       ]
     }
