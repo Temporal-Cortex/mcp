@@ -1,7 +1,11 @@
 # Auto-merge Dependabot PRs for patch updates when CI passes.
 # Minor and major updates require manual review.
 #
-# Prerequisite: Branch protection rules on main must require CI status checks.
+# Prerequisites:
+#   - Branch protection rules on main must require CI status checks.
+#   - Enable "Allow GitHub Actions to create and approve pull requests"
+#     in Settings > Actions > General for auto-approval to work.
+#     Auto-merge is still enabled even if approval is not permitted.
 
 name: Dependabot Auto-Merge
 
@@ -26,6 +30,7 @@ jobs:
 
       - name: Auto-approve patch updates
         if: steps.metadata.outputs.update-type == 'version-update:semver-patch'
+        continue-on-error: true
         run: gh pr review --approve "$PR_URL"
         env:
           PR_URL: ${{ github.event.pull_request.html_url }}
