@@ -188,11 +188,13 @@ Active when `REDIS_URLS` is **not** set.
 
 ### Platform Mode
 
-Active when `REDIS_URLS` **is** set.
+Active when `DATABASE_URL` **is** set (managed service at mcp.temporal-cortex.com).
 
-- Redis-based distributed locking (Redlock algorithm)
-- Multi-process safety for concurrent agents
-- Production deployment with external infrastructure
+- Postgres-backed credentials with managed OAuth lifecycle
+- Bearer token authentication via API keys
+- Redis-based distributed locking (Redlock algorithm) for multi-agent safety
+- Usage metering, caller-based policies, and content firewall
+- Designed for teams and production deployments
 
 There is no manual mode flag — the server inspects the environment and selects the appropriate mode automatically.
 

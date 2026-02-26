@@ -111,7 +111,7 @@ All user-provided text (event summaries, descriptions) passes through a prompt i
 
 The server operates in two modes, auto-detected at startup:
 
-### Lite Mode (Default)
+### Local Mode (Default)
 
 Activated when `REDIS_URLS` is **not** set.
 
@@ -120,14 +120,15 @@ Activated when `REDIS_URLS` is **not** set.
 - **Provider**: Google Calendar (single account)
 - **Use case**: Individual developers, local AI assistants
 
-### Full Mode
+### Platform Mode
 
-Activated when `REDIS_URLS` **is** set.
+Activated when `DATABASE_URL` **is** set (managed service at mcp.temporal-cortex.com).
 
 - **Locking**: Redis-based distributed locking (Redlock algorithm with 3-node quorum)
-- **Credentials**: Enterprise credential management
+- **Credentials**: PostgresCredentialStore with managed OAuth lifecycle
+- **Authentication**: Bearer token authentication via API keys
 - **Provider**: Multiple providers and accounts
-- **Use case**: Production deployments, multi-agent environments
+- **Use case**: Production deployments, multi-agent environments, teams
 
 There is no manual mode flag — the server inspects the environment and selects the appropriate mode automatically.
 

@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Renamed "Cloud Mode" to "Temporal Cortex Platform" throughout documentation
+- Updated Platform Mode description to emphasize full capability set (safety, metering, policies)
+- Fixed FAQ link: replaced tally.so early access form with live app.temporal-cortex.com
+
 ## [0.5.0] - 2026-02-26
 
 ### Added

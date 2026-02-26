@@ -161,9 +161,9 @@ After authentication, verify it works by asking your AI assistant: *"What time i
 
 For a guided workflow, install the [calendar-scheduling Agent Skill](https://github.com/billylui/temporal-cortex-skill) to teach your AI agent the orient-resolve-query-book pattern.
 
-## Cloud Mode
+## Temporal Cortex Platform
 
-Instead of running the MCP server locally via `npx`, you can connect to the managed cloud endpoint. Cloud Mode requires no Node.js installation and no local OAuth credentials.
+Instead of running the MCP server locally via `npx`, you can use the managed Temporal Cortex Platform. No Node.js installation or local OAuth credentials required.
 
 **Getting started:**
 
@@ -172,7 +172,7 @@ Instead of running the MCP server locally via `npx`, you can connect to the mana
 3. Generate an API key from the dashboard.
 4. Add the MCP config to your AI client (see examples below).
 
-### Claude Desktop (Cloud)
+### Claude Desktop (Platform)
 
 Add to your Claude Desktop config file:
 
@@ -189,7 +189,7 @@ Add to your Claude Desktop config file:
 }
 ```
 
-### Cursor (Cloud)
+### Cursor (Platform)
 
 Add to Cursor's MCP settings (`~/.cursor/mcp.json`) using the same format:
 
@@ -206,14 +206,18 @@ Add to Cursor's MCP settings (`~/.cursor/mcp.json`) using the same format:
 }
 ```
 
-**Benefits over Local Mode:**
+**Platform capabilities (beyond Local Mode):**
 
 - **No OAuth credentials to manage** -- calendar connections are handled in the dashboard via standard OAuth flows.
 - **No Node.js required** -- the client connects directly to the cloud endpoint over HTTP.
 - **Usage dashboard** -- monitor tool calls, connected calendars, and billing from [app.temporal-cortex.com](https://app.temporal-cortex.com).
 - **Managed calendar connections** -- token refresh, re-authentication, and provider health are handled server-side.
+- **Multi-agent coordination** -- distributed locking prevents double-bookings when multiple agents schedule simultaneously.
+- **Usage metering** -- track tool calls per agent and team from the dashboard.
+- **Content firewall** -- automatic prompt injection detection and zero-width Unicode stripping.
+- **Caller-based policies** -- enforce booking rules per agent (max duration, allowed hours, booking limits).
 
-All 12 tools and 4 layers work identically in Cloud Mode. The only difference is transport: the client sends requests to the cloud endpoint instead of a local stdio process.
+All 12 tools and 4 layers work identically. The Platform adds safety, coordination, and visibility infrastructure on top.
 
 ## What tools does Temporal Cortex provide?
 
@@ -315,7 +319,7 @@ HTTP_PORT=8009 npx @temporal-cortex/cortex-mcp@0.5.0
 Mode is auto-detected — there is no configuration flag.
 
 - **Local Mode** (default): No infrastructure required. Uses in-memory locking and local file credential storage. Supports multiple calendar providers (Google, Outlook, CalDAV) with multi-calendar availability merging. Designed for individual developers.
-- **Platform Mode** (activated when `REDIS_URLS` is set): Uses Redis-based distributed locking (Redlock) for multi-process safety. Designed for production deployments with multiple concurrent agents.
+- **Platform Mode** (managed service at mcp.temporal-cortex.com): Managed multi-tenant hosting with Postgres-backed credentials, Bearer token authentication, guardrails (rate limiting + booking caps), usage metering, and distributed locking for multi-agent safety. Designed for teams and production deployments.
 
 ## How do I configure Temporal Cortex?
 
@@ -328,7 +332,7 @@ Mode is auto-detected — there is no configuration flag.
 | `MICROSOFT_CLIENT_SECRET` | For Outlook | — | Azure AD client secret for Outlook calendar access |
 | `TIMEZONE` | No | auto-detected | IANA timezone override (e.g., `America/New_York`). Overrides stored config and OS detection. |
 | `WEEK_START` | No | `monday` | Week start day: `monday` (ISO 8601) or `sunday`. Affects "start of week", "next week", etc. |
-| `REDIS_URLS` | No | — | Comma-separated Redis URLs. When set, activates Platform Mode with distributed locking. |
+| `REDIS_URLS` | No | — | Comma-separated Redis URLs for distributed locking within Platform Mode. Optional — falls back to in-memory locking if not set. |
 | `TENANT_ID` | No | auto-generated | UUID for tenant isolation |
 | `LOCK_TTL_SECS` | No | `30` | Lock time-to-live in seconds |
 | `OAUTH_REDIRECT_PORT` | No | `8085` | Port for the local OAuth callback server |
@@ -378,7 +382,7 @@ All temporal tools are DST-aware. `adjust_timestamp` with "+1d" across a spring-
 
 ### What is the difference between Local Mode and Platform Mode?
 
-Local Mode (default) uses in-memory locking and local file storage with no infrastructure required. Platform Mode activates when `REDIS_URLS` is set, using Redis-based distributed locking (Redlock) for multi-process safety in production deployments with multiple concurrent agents.
+Local Mode (default) runs on your machine with in-memory locking, local file credential storage, and no infrastructure required — all 12 tools work with zero setup. Platform Mode (at mcp.temporal-cortex.com) adds managed OAuth lifecycle, multi-agent coordination with distributed locking, usage metering, caller-based policies, a content firewall, and a dashboard UI. Both expose the same 12 tools and 4 layers — the Platform adds safety, coordination, and visibility for teams.
 
 ### How accurate is the 60% hallucination statistic?
 
@@ -386,7 +390,7 @@ The figure comes from the AuthenHallu benchmark ([arXiv:2510.10539](https://arxi
 
 ### Is there a managed cloud option?
 
-A managed cloud deployment is available for teams that need zero-setup hosting, managed OAuth, and multi-agent coordination. Self-hosted enterprise options include SSO, audit logging, and data residency controls. [Sign up for early access](https://tally.so/r/aQ66W2).
+Yes. The Temporal Cortex Platform is available at [app.temporal-cortex.com](https://app.temporal-cortex.com). Sign up for free to get managed hosting, OAuth lifecycle management, and a usage dashboard. Pro and Enterprise tiers add Open Scheduling, caller-based policies, and compliance features.
 
 ## Does Temporal Cortex collect telemetry?
 

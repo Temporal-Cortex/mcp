@@ -107,7 +107,7 @@
         },
         {
           "name": "REDIS_URLS",
-          "description": "Comma-separated Redis URLs. When set, activates Platform Mode with distributed locking.",
+          "description": "Comma-separated Redis URLs for distributed locking within Platform Mode. Optional.",
           "isRequired": false,
           "isSecret": false
         }

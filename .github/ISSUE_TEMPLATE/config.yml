@@ -1,8 +1,8 @@
 blank_issues_enabled: false
 contact_links:
   - name: Production / Enterprise Support
-    url: https://tally.so/r/aQ66W2
-    about: Request early access to the Temporal Cortex Platform for multi-provider support, distributed locking, and enterprise features.
+    url: https://app.temporal-cortex.com
+    about: Sign up for the Temporal Cortex Platform — managed hosting, multi-agent coordination, usage metering, and enterprise features.
   - name: Core Library Issues (Truth Engine, TOON)
     url: https://github.com/billylui/temporal-cortex-core/issues
     about: For bugs or feature requests related to the open-source computation libraries.
