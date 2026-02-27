@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Renamed "Cloud Mode" to "Temporal Cortex Platform" throughout documentation
 - Updated Platform Mode description to emphasize full capability set (safety, metering, policies)
 - Fixed FAQ link: replaced tally.so early access form with live app.temporal-cortex.com
+- Replaced misattributed AuthenHallu citation with Test of Time (ICLR 2025) and OOLONG benchmarks for temporal reasoning accuracy claims
 
 ## [0.5.0] - 2026-02-26
 
