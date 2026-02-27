@@ -10,7 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.5.2] - 2026-02-27
 
 ### Fixed
-- Fixed MCP Registry OIDC namespace casing — `.mcp/server.json` name now uses `io.github.Temporal-Cortex/mcp` (case-sensitive match with GitHub org)
+- Fixed MCP Registry OIDC namespace — `.mcp/server.json` name aligned to `io.github.temporal-cortex/mcp` matching lowercase GitHub org
+
+### Changed
+- GitHub org renamed from `Temporal-Cortex` to `temporal-cortex` (lowercase)
 
 ## [0.5.1] - 2026-02-27
 
