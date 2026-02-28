@@ -6,7 +6,7 @@
 [![Smithery](https://smithery.ai/badge/@temporal-cortex/cortex-mcp)](https://smithery.ai/server/@temporal-cortex/cortex-mcp)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-**v0.5.5** · February 2026 · [Changelog](CHANGELOG.md) · **Website:** [temporal-cortex.com](https://temporal-cortex.com)
+**v0.5.6** · February 2026 · [Changelog](CHANGELOG.md) · **Website:** [temporal-cortex.com](https://temporal-cortex.com)
 
 Temporal Cortex is a Model Context Protocol server that gives AI agents deterministic calendar capabilities — temporal context, datetime resolution, multi-calendar availability merging across Google Calendar, Microsoft Outlook, and CalDAV, and conflict-free booking with Two-Phase Commit. Powered by [Truth Engine](https://github.com/temporal-cortex/core). Install: `npx @temporal-cortex/cortex-mcp`.
 
@@ -60,7 +60,7 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS)
   "mcpServers": {
     "temporal-cortex": {
       "command": "npx",
-      "args": ["-y", "@temporal-cortex/cortex-mcp@0.5.5"],
+      "args": ["-y", "@temporal-cortex/cortex-mcp@0.5.6"],
       "env": {
         "GOOGLE_CLIENT_ID": "your-client-id.apps.googleusercontent.com",
         "GOOGLE_CLIENT_SECRET": "your-client-secret",
@@ -80,7 +80,7 @@ Add to Cursor's MCP settings (`~/.cursor/mcp.json`):
   "mcpServers": {
     "temporal-cortex": {
       "command": "npx",
-      "args": ["-y", "@temporal-cortex/cortex-mcp@0.5.5"],
+      "args": ["-y", "@temporal-cortex/cortex-mcp@0.5.6"],
       "env": {
         "GOOGLE_CLIENT_ID": "your-client-id.apps.googleusercontent.com",
         "GOOGLE_CLIENT_SECRET": "your-client-secret",
@@ -100,7 +100,7 @@ Add to Windsurf's MCP config (`~/.codeium/windsurf/mcp_config.json`):
   "mcpServers": {
     "temporal-cortex": {
       "command": "npx",
-      "args": ["-y", "@temporal-cortex/cortex-mcp@0.5.5"],
+      "args": ["-y", "@temporal-cortex/cortex-mcp@0.5.6"],
       "env": {
         "GOOGLE_CLIENT_ID": "your-client-id.apps.googleusercontent.com",
         "GOOGLE_CLIENT_SECRET": "your-client-secret",
@@ -311,7 +311,7 @@ Transport mode is auto-detected — set `HTTP_PORT` to switch from stdio to HTTP
 
 ```bash
 # HTTP mode example
-HTTP_PORT=8009 npx @temporal-cortex/cortex-mcp@0.5.5
+HTTP_PORT=8009 npx @temporal-cortex/cortex-mcp@0.5.6
 ```
 
 ### Local Mode vs Platform Mode

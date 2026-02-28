@@ -62,7 +62,7 @@ File: `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) 
   "mcpServers": {
     "temporal-cortex": {
       "command": "npx",
-      "args": ["-y", "@temporal-cortex/cortex-mcp@0.5.5"],
+      "args": ["-y", "@temporal-cortex/cortex-mcp@0.5.6"],
       "env": {
         "GOOGLE_CLIENT_ID": "your-client-id.apps.googleusercontent.com",
         "GOOGLE_CLIENT_SECRET": "your-client-secret",
@@ -82,7 +82,7 @@ File: `~/.cursor/mcp.json`
   "mcpServers": {
     "temporal-cortex": {
       "command": "npx",
-      "args": ["-y", "@temporal-cortex/cortex-mcp@0.5.5"],
+      "args": ["-y", "@temporal-cortex/cortex-mcp@0.5.6"],
       "env": {
         "GOOGLE_CLIENT_ID": "your-client-id.apps.googleusercontent.com",
         "GOOGLE_CLIENT_SECRET": "your-client-secret",
@@ -102,7 +102,7 @@ File: `~/.codeium/windsurf/mcp_config.json`
   "mcpServers": {
     "temporal-cortex": {
       "command": "npx",
-      "args": ["-y", "@temporal-cortex/cortex-mcp@0.5.5"],
+      "args": ["-y", "@temporal-cortex/cortex-mcp@0.5.6"],
       "env": {
         "GOOGLE_CLIENT_ID": "your-client-id.apps.googleusercontent.com",
         "GOOGLE_CLIENT_SECRET": "your-client-secret",
