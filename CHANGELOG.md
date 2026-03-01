@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.7] - 2026-03-01
+
+### Added
+- **docs**: Added "How do I verify the installation?" section to README — manual SHA256 verification commands, build provenance links (GitHub Actions CI), and Docker containment instructions
+
+### Changed
+- Version alignment with Skills v0.5.7 and Platform v0.5.7 (security audit remediation: VirusTotal supply chain + OpenClaw confidence improvements)
+
 ## [0.5.6] - 2026-02-28
 
 ### Fixed
