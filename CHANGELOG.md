@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.0] - 2026-03-04
+
+### Added
+- **docs**: Open Scheduling guide (`docs/open-scheduling.md`) — comprehensive documentation for public endpoints, Agent Card, A2A JSON-RPC, rate limits, and security model
+
+### Changed
+- Version alignment with Platform v0.7.0 and Skills v0.7.0 (Open Scheduling, Agent Card, protocol-agnostic public endpoints, Portal UI)
+
 ## [0.6.2] - 2026-03-04
 
 ### Changed
