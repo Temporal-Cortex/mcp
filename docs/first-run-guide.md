@@ -158,7 +158,7 @@ The agent should call `convert_timezone` and return the converted time with DST 
 
 ## Adding the Agent Skill (Optional)
 
-The **[calendar-scheduling](https://github.com/temporal-cortex/skills)** Agent Skill teaches your AI agent the correct workflow pattern for calendar operations — orient, resolve, query, book. Install it for more reliable scheduling behavior:
+The **[Temporal Cortex Agent Skills](https://github.com/temporal-cortex/skills)** teach your AI agent the correct workflow pattern for calendar operations — orient, resolve, query, book. Install them for more reliable scheduling behavior:
 
 ```bash
 # Claude Code
@@ -200,7 +200,7 @@ Some AI clients need to be explicitly told to use the MCP tools. Try being speci
 
 > "Use the Temporal Cortex tools to check my calendar for tomorrow."
 
-Or install the [calendar-scheduling Agent Skill](https://github.com/temporal-cortex/skills) for automatic tool routing.
+Or install the [Temporal Cortex Agent Skills](https://github.com/temporal-cortex/skills) for automatic tool routing.
 
 ## Next Steps
 

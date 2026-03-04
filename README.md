@@ -60,7 +60,7 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS)
   "mcpServers": {
     "temporal-cortex": {
       "command": "npx",
-      "args": ["-y", "@temporal-cortex/cortex-mcp@0.7.0"],
+      "args": ["-y", "@temporal-cortex/cortex-mcp"],
       "env": {
         "GOOGLE_CLIENT_ID": "your-client-id.apps.googleusercontent.com",
         "GOOGLE_CLIENT_SECRET": "your-client-secret",
@@ -80,7 +80,7 @@ Add to Cursor's MCP settings (`~/.cursor/mcp.json`):
   "mcpServers": {
     "temporal-cortex": {
       "command": "npx",
-      "args": ["-y", "@temporal-cortex/cortex-mcp@0.7.0"],
+      "args": ["-y", "@temporal-cortex/cortex-mcp"],
       "env": {
         "GOOGLE_CLIENT_ID": "your-client-id.apps.googleusercontent.com",
         "GOOGLE_CLIENT_SECRET": "your-client-secret",
@@ -100,7 +100,7 @@ Add to Windsurf's MCP config (`~/.codeium/windsurf/mcp_config.json`):
   "mcpServers": {
     "temporal-cortex": {
       "command": "npx",
-      "args": ["-y", "@temporal-cortex/cortex-mcp@0.7.0"],
+      "args": ["-y", "@temporal-cortex/cortex-mcp"],
       "env": {
         "GOOGLE_CLIENT_ID": "your-client-id.apps.googleusercontent.com",
         "GOOGLE_CLIENT_SECRET": "your-client-secret",
@@ -185,7 +185,7 @@ All preferences are stored in `~/.config/temporal-cortex/config.json` and used b
 
 After authentication, verify it works by asking your AI assistant: *"What time is it?"* — the agent should call `get_temporal_context` and return your current local time.
 
-For a guided workflow, install the [calendar-scheduling Agent Skill](https://github.com/temporal-cortex/skills) to teach your AI agent the orient-resolve-query-book pattern.
+For a guided workflow, install the [Temporal Cortex Agent Skills](https://github.com/temporal-cortex/skills) to teach your AI agent the orient-resolve-query-book pattern.
 
 ## Temporal Cortex Platform
 
@@ -357,7 +357,7 @@ Transport mode is auto-detected — set `HTTP_PORT` to switch from stdio to HTTP
 
 ```bash
 # HTTP mode example
-HTTP_PORT=8009 npx @temporal-cortex/cortex-mcp@0.7.0
+HTTP_PORT=8009 npx @temporal-cortex/cortex-mcp
 ```
 
 ### Local Mode vs Platform Mode
@@ -452,7 +452,7 @@ export TEMPORAL_CORTEX_TELEMETRY=off
 
 ## How do I teach my AI agent the scheduling workflow?
 
-The **[calendar-scheduling](https://github.com/temporal-cortex/skills)** Agent Skill teaches AI agents the correct workflow for using these tools — from temporal orientation through conflict-free booking. Install it to give your agent procedural knowledge for calendar operations:
+The **[Temporal Cortex Agent Skills](https://github.com/temporal-cortex/skills)** teach AI agents the correct workflow for using these tools — from temporal orientation through conflict-free booking. Install them to give your agent procedural knowledge for calendar operations:
 
 ```bash
 # Claude Code
