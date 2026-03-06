@@ -11,6 +11,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **docs**: Updated stale "4 layers" → "5 layers" and "12 tools" → "15 tools" references across README, llms-install.md, and docs guides
 - **docs**: Added Layer 0 (Discovery) to llms-install.md; split combined "Layer 3-4" into separate sections with all Open Scheduling tools
 
+## [0.7.8] - 2026-03-06
+
+### Fixed
+- **skills**: Improve alias and scheduling SKILL.md content for ClawHub scanner score improvement
+
 ## [0.7.7] - 2026-03-06
 
 ### Fixed
@@ -309,7 +314,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Deterministic RRULE expansion via Truth Engine (DST-aware, BYSETPOS, leap years)
 - RRULE Challenge CLI command for demonstrating edge case handling
 
-[Unreleased]: https://github.com/temporal-cortex/mcp/compare/v0.7.7...HEAD
+[Unreleased]: https://github.com/temporal-cortex/mcp/compare/v0.7.8...HEAD
+[0.7.8]: https://github.com/temporal-cortex/mcp/compare/v0.7.7...v0.7.8
 [0.7.7]: https://github.com/temporal-cortex/mcp/compare/v0.7.6...v0.7.7
 [0.7.6]: https://github.com/temporal-cortex/mcp/compare/v0.7.5...v0.7.6
 [0.7.5]: https://github.com/temporal-cortex/mcp/compare/v0.7.4...v0.7.5
