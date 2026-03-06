@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **agents**: Added `AGENTS.md` for AI coding agent guidance (project structure, conventions, boundaries)
 
 ### Fixed
+- **examples**: Cookbook notebook now uses a read-only availability query for the initial example instead of a booking request — prevents unintended calendar writes when running top-to-bottom
+- **examples**: Fixed stale "destructive tools" → "write tools" in examples README (booking tools have `destructiveHint: false`)
 - **docs**: Updated stale "4 layers" → "5 layers" and "12 tools" → "15 tools" references across README, llms-install.md, and docs guides
 - **docs**: Added Layer 0 (Discovery) to llms-install.md; split combined "Layer 3-4" into separate sections with all Open Scheduling tools
 
