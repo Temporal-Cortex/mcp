@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.6] - 2026-03-06
+
+### Fixed
+- **binary**: Linux binaries now built on ubuntu-22.04 (glibc 2.35) for Debian bookworm compatibility — fixes `GLIBC_2.39 not found` on bookworm-based hosts
+
+### Added
+- **examples**: CrewAI integration example with 3-agent scheduling crew (`examples/crewai/`)
+- **docs**: CrewAI integration guide (`docs/crewai-integration.md`)
+- **README**: CrewAI FAQ entry with quick start snippets
+
 ## [0.7.5] - 2026-03-06
 
 ### Added

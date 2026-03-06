@@ -7,7 +7,9 @@
     { "pattern": "^https://www\\.npmjs\\.com/package/" },
     { "pattern": "^https://github\\.com/temporal-cortex/mcp/compare/" },
     { "pattern": "^https://github\\.com/temporal-cortex/mcp/issues/new" },
-    { "pattern": "^https://github\\.com/temporal-cortex/skills" }
+    { "pattern": "^https://github\\.com/temporal-cortex/skills" },
+    { "pattern": "^https://docs\\.crewai\\.com/" },
+    { "pattern": "^https://www\\.crewai\\.com/" }
   ],
   "retryOn429": true,
   "retryCount": 3,

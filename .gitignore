@@ -19,6 +19,10 @@ node_modules/
 # Logs
 *.log
 
+# Python
+__pycache__/
+*.pyc
+
 # Claude Code (personal config)
 CLAUDE.md
 CLAUDE.local.md

@@ -6,7 +6,7 @@
 [![Smithery](https://smithery.ai/badge/@temporal-cortex/cortex-mcp)](https://smithery.ai/server/@temporal-cortex/cortex-mcp)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-**v0.7.5** · March 2026 · [Changelog](CHANGELOG.md) · **Website:** [temporal-cortex.com](https://temporal-cortex.com)
+**v0.7.6** · March 2026 · [Changelog](CHANGELOG.md) · **Website:** [temporal-cortex.com](https://temporal-cortex.com)
 
 Temporal Cortex is a Model Context Protocol server that gives AI agents deterministic calendar capabilities — temporal context, datetime resolution, multi-calendar availability merging across Google Calendar, Microsoft Outlook, and CalDAV, and conflict-free booking with Two-Phase Commit. Powered by [Truth Engine](https://github.com/temporal-cortex/core). Install: `npx @temporal-cortex/cortex-mcp`.
 
@@ -134,7 +134,7 @@ SHA256 checksums are published with every [GitHub Release](https://github.com/te
 
 ```bash
 # Download the published checksums
-curl -sL https://github.com/temporal-cortex/mcp/releases/download/mcp-v0.7.5/SHA256SUMS.txt
+curl -sL https://github.com/temporal-cortex/mcp/releases/download/mcp-v0.7.6/SHA256SUMS.txt
 
 # Compare against your installed binary
 sha256sum "$(dirname "$(which cortex-mcp)")/../cortex-mcp" 2>/dev/null || \
@@ -417,6 +417,46 @@ Layer 1 tools (temporal context, datetime resolution, timezone conversion, durat
 ### Which AI clients are supported?
 
 Any Model Context Protocol-compatible client works. Tested configurations are provided for Claude Desktop, Claude Code, VS Code with GitHub Copilot, Cursor, and Windsurf. The server uses stdio transport by default and also supports streamable HTTP transport for custom integrations.
+
+### How do I use Temporal Cortex with CrewAI?
+
+Temporal Cortex works with [CrewAI](https://www.crewai.com/) via the native MCPServerAdapter — no wrapper needed. See the [CrewAI integration guide](docs/crewai-integration.md) and [example code](examples/crewai/) for a complete multi-agent scheduling crew.
+
+**Quick start (DSL — simplest):**
+
+```python
+from crewai import Agent
+from crewai.mcp import MCPServerStdio
+
+scheduler = Agent(
+    role="Calendar Scheduling Assistant",
+    goal="Schedule meetings using deterministic calendar tools",
+    backstory="You always call get_temporal_context first to orient in time.",
+    mcps=[
+        MCPServerStdio(
+            command="npx",
+            args=["-y", "@temporal-cortex/cortex-mcp"],
+            env={"TIMEZONE": "America/New_York"},
+        ),
+    ],
+)
+```
+
+**Platform Mode (SSE — no local server):**
+
+```python
+from crewai.mcp import MCPServerSSE
+
+scheduler = Agent(
+    ...,
+    mcps=[
+        MCPServerSSE(
+            url="https://mcp.temporal-cortex.com/mcp",
+            headers={"Authorization": "Bearer YOUR_API_KEY"},
+        ),
+    ],
+)
+```
 
 ### Can I connect multiple calendar providers simultaneously?
 
