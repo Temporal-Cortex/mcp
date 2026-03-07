@@ -20,6 +20,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **docs**: Updated stale "4 layers" → "5 layers" and "12 tools" → "15 tools" references across README, llms-install.md, and docs guides
 - **docs**: Added Layer 0 (Discovery) to llms-install.md; split combined "Layer 3-4" into separate sections with all Open Scheduling tools
 
+## [0.7.9] - 2026-03-07
+
+### Changed
+- Version bump to 0.7.9 — tracks Skills scanner remediation release
+
 ## [0.7.8] - 2026-03-06
 
 ### Fixed
