@@ -28,7 +28,7 @@ Ensure version numbers match across README.md, Dockerfile, and smithery.yaml.
 
 - Pin npm version (`@temporal-cortex/cortex-mcp@X.Y.Z`) in Dockerfile, smithery.yaml, and `.mcp/server.json`
 - Do NOT pin npm versions in user-facing docs — always use `@temporal-cortex/cortex-mcp` (latest)
-- Keep tool counts (15), layer numbers (0-4), and tool lists in sync with the source
+- Keep tool counts (18), layer numbers (0-4), and tool lists in sync with the source
 - README uses Q&A format: each `##` section is a question starting with "How", "What", "Can"
 - No pricing or business strategy content (public repo)
 

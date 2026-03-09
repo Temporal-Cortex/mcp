@@ -39,7 +39,7 @@ npx @temporal-cortex/cortex-mcp auth google
 
 ## Quick Start: ReAct Agent
 
-The simplest integration — a single ReAct agent with all 15 tools, using `MultiServerMCPClient` for MCP tool discovery:
+The simplest integration — a single ReAct agent with all 18 tools, using `MultiServerMCPClient` for MCP tool discovery:
 
 ```python
 import asyncio
@@ -94,7 +94,7 @@ async def main():
 asyncio.run(main())
 ```
 
-The `MultiServerMCPClient` launches the MCP server, discovers all 15 tools, and converts them into LangChain-compatible `StructuredTool` objects. The ReAct agent reasons over them automatically.
+The `MultiServerMCPClient` launches the MCP server, discovers all 18 tools, and converts them into LangChain-compatible `StructuredTool` objects. The ReAct agent reasons over them automatically.
 
 ## Platform Mode (HTTP Transport)
 
@@ -113,7 +113,7 @@ async with MultiServerMCPClient(
     }
 ) as client:
     tools = client.get_tools()
-    # Platform Mode discovers all 15 tools (including Open Scheduling)
+    # Platform Mode discovers all 18 tools (including Open Scheduling)
     agent = create_react_agent(model, tools, prompt=SYSTEM_PROMPT)
 ```
 
@@ -228,7 +228,7 @@ Runs the MCP server locally via `npx`. No cloud account needed.
 }
 ```
 
-- Up to 15 tools available (Layers 0-4)
+- Up to 18 tools available (Layers 0-4)
 - Requires Node.js 18+ and local OAuth credentials
 - In-memory locking (single-process safety)
 
@@ -246,7 +246,7 @@ Connects to the Temporal Cortex Platform at `mcp.temporal-cortex.com`. No Node.j
 }
 ```
 
-- 15 tools available (Layers 0-4, including Open Scheduling)
+- 18 tools available (Layers 0-4, including Open Scheduling)
 - Managed OAuth lifecycle — no local credentials
 - Distributed locking for multi-agent safety
 - Usage metering, content firewall, caller-based policies
@@ -254,7 +254,7 @@ Connects to the Temporal Cortex Platform at `mcp.temporal-cortex.com`. No Node.j
 
 ## Tool Layer Architecture
 
-Temporal Cortex organizes 15 tools in 5 layers. Map `StateGraph` nodes to layers for effective multi-agent workflows:
+Temporal Cortex organizes 18 tools in 5 layers. Map `StateGraph` nodes to layers for effective multi-agent workflows:
 
 | Layer | Tools | Suggested Node Role |
 |-------|-------|---------------------|
@@ -289,7 +289,7 @@ Temporal Cortex organizes 15 tools in 5 layers. Map `StateGraph` nodes to layers
 ## Learn More
 
 - [Temporal Cortex MCP](https://github.com/temporal-cortex/mcp) — Full documentation and setup guides
-- [Tool reference](tools.md) — Complete input/output schemas for all 15 tools
+- [Tool reference](tools.md) — Complete input/output schemas for all 18 tools
 - [Architecture overview](architecture.md) — System design and request flow
 - [Agent Skills](https://github.com/temporal-cortex/skills) — Procedural knowledge for calendar workflows
 - [LangGraph documentation](https://langchain-ai.github.io/langgraph/) — Official LangGraph reference

@@ -28,7 +28,7 @@ pip install openai-agents python-dotenv
 
 ## Quick Start: Single Agent
 
-The simplest integration — a single agent with all 15 tools:
+The simplest integration — a single agent with all 18 tools:
 
 ```python
 import asyncio
@@ -77,7 +77,7 @@ async def main():
 asyncio.run(main())
 ```
 
-The agent auto-discovers all 15 tools from the MCP server. The instructions guide it to call tools in the correct order.
+The agent auto-discovers all 18 tools from the MCP server. The instructions guide it to call tools in the correct order.
 
 ## Multi-Agent: Agent-as-Tool (Hub-and-Spoke)
 
@@ -189,7 +189,7 @@ This means no local MCP process, no `npx`, no Node.js runtime needed. The trade-
 
 ## Tool Layer Architecture
 
-Temporal Cortex organizes 15 tools in 5 layers. Map agent roles to layers for effective multi-agent workflows:
+Temporal Cortex organizes 18 tools in 5 layers. Map agent roles to layers for effective multi-agent workflows:
 
 | Layer | Tools | Suggested Agent Role |
 |-------|-------|---------------------|
@@ -223,7 +223,7 @@ Temporal Cortex organizes 15 tools in 5 layers. Map agent roles to layers for ef
 ## Learn More
 
 - [Temporal Cortex MCP](https://github.com/temporal-cortex/mcp) — Full documentation and setup guides
-- [Tool reference](tools.md) — Complete input/output schemas for all 15 tools
+- [Tool reference](tools.md) — Complete input/output schemas for all 18 tools
 - [Architecture overview](architecture.md) — System design and request flow
 - [Agent Skills](https://github.com/temporal-cortex/skills) — Procedural knowledge for calendar workflows
 - [OpenAI Agents SDK documentation](https://openai.github.io/openai-agents-python/) — Official SDK reference

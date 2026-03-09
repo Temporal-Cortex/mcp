@@ -55,7 +55,7 @@ The crew follows the deterministic workflow: **orient → query → book**.
 | Transport | Mode | When to Use |
 |-----------|------|-------------|
 | **stdio** (default) | Local Mode | Development, individual use, no cloud account needed |
-| **SSE** | Platform Mode | Production, teams, managed OAuth, distributed locking, 15 tools |
+| **SSE** | Platform Mode | Production, teams, managed OAuth, distributed locking, 18 tools |
 
 Stdio runs the MCP server locally via `npx`. SSE connects to the managed Platform at `mcp.temporal-cortex.com` — no Node.js required, but needs an API key from [app.temporal-cortex.com](https://app.temporal-cortex.com).
 

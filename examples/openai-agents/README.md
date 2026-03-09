@@ -38,7 +38,7 @@ All examples connect to the managed Temporal Cortex Platform at `mcp.temporal-co
 
 | File | Description |
 |------|-------------|
-| `simple.py` | Single agent with all 15 tools — orient, query, book |
+| `simple.py` | Single agent with all 18 tools — orient, query, book |
 | `multi_agent.py` | Hub-and-spoke pattern: coordinator calls Temporal Analyst and Calendar Analyst as tools |
 | `human_in_the_loop.py` | Approval workflow for write tools (`book_slot`, `request_booking`) |
 | `.env.example` | Environment variable template |

@@ -80,7 +80,7 @@ crew = Crew(agents=[scheduler], tasks=[task], process=Process.sequential, verbos
 result = crew.kickoff()
 ```
 
-CrewAI auto-discovers all 15 Temporal Cortex tools from the MCP server. The agent's backstory guides it to call tools in the correct order.
+CrewAI auto-discovers all 18 Temporal Cortex tools from the MCP server. The agent's backstory guides it to call tools in the correct order.
 
 ## Option 2: MCPServerAdapter (Multi-Agent)
 
@@ -168,7 +168,7 @@ temporal_cortex = MCPServerStdio(
 )
 ```
 
-- Up to 15 tools available (Layers 0-4)
+- Up to 18 tools available (Layers 0-4)
 - Requires Node.js 18+ and local OAuth credentials
 - In-memory locking (single-process safety)
 
@@ -185,7 +185,7 @@ temporal_cortex = MCPServerSSE(
 )
 ```
 
-- 15 tools available (Layers 0-4, including Open Scheduling)
+- 18 tools available (Layers 0-4, including Open Scheduling)
 - Managed OAuth lifecycle — no local credentials
 - Distributed locking for multi-agent safety
 - Usage metering, content firewall, caller-based policies
@@ -193,7 +193,7 @@ temporal_cortex = MCPServerSSE(
 
 ## Tool Layer Architecture
 
-Temporal Cortex organizes 15 tools in 5 layers. Map agent roles to layers for effective multi-agent crews:
+Temporal Cortex organizes 18 tools in 5 layers. Map agent roles to layers for effective multi-agent crews:
 
 | Layer | Tools | Suggested Agent Role |
 |-------|-------|---------------------|
@@ -227,7 +227,7 @@ Temporal Cortex organizes 15 tools in 5 layers. Map agent roles to layers for ef
 ## Learn More
 
 - [Temporal Cortex MCP](https://github.com/temporal-cortex/mcp) — Full documentation and setup guides
-- [Tool reference](tools.md) — Complete input/output schemas for all 15 tools
+- [Tool reference](tools.md) — Complete input/output schemas for all 18 tools
 - [Architecture overview](architecture.md) — System design and request flow
 - [Agent Skills](https://github.com/temporal-cortex/skills) — Procedural knowledge for calendar workflows
 - [CrewAI MCP documentation](https://docs.crewai.com/en/mcp/overview) — CrewAI's MCP integration guide

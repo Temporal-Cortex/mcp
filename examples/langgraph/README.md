@@ -41,7 +41,7 @@ Four examples demonstrating different LangGraph integration patterns:
 
 | File | Description |
 |------|-------------|
-| `simple.py` | Single ReAct agent with all 15 tools — orient, query, book |
+| `simple.py` | Single ReAct agent with all 18 tools — orient, query, book |
 | `simple_platform.py` | Same agent connecting to managed Platform at `mcp.temporal-cortex.com` |
 | `multi_agent.py` | StateGraph: Temporal Analyst → Calendar Manager → Booking Coordinator |
 | `human_in_the_loop.py` | Read-only tools auto-proceed; booking pauses for human approval |

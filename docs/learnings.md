@@ -76,7 +76,7 @@ The open-core model works as a funnel: developers discover Truth Engine or TOON,
 
 ## Agent Skill: Skill-First Distribution (2026-02-22)
 
-- **What changed:** Created a 4th public repository ([temporal-cortex/skills](https://github.com/temporal-cortex/skills)) containing the Agent Skills. The skills teach AI agents the 5-step scheduling workflow (discover → orient → resolve → query → act) using the MCP server's 15 tools.
+- **What changed:** Created a 4th public repository ([temporal-cortex/skills](https://github.com/temporal-cortex/skills)) containing the Agent Skills. The skills teach AI agents the 7-step scheduling workflow (discover → orient → resolve → query → act) using the MCP server's 18 tools.
 - **Why:** The Agent Skills open standard (launched by Anthropic Dec 2025, adopted by 26+ platforms including OpenAI Codex, Google Gemini, GitHub Copilot, Cursor) provides a universal format for procedural knowledge. MCP servers provide tool connectivity; Agent Skills provide the expertise for how to use those tools effectively. Existing calendar skills in the ecosystem are thin wrappers with zero procedural knowledge — Temporal Cortex is the first serious calendar scheduling skill with multi-calendar merging, conflict detection, RRULE expansion, and atomic booking.
 - **Key decisions:**
   - Separate repo (not in MCP repo): Different lifecycle (skill content evolves with AI agent patterns, not binary releases), different audience (agents/users vs. developers), simplifies cross-platform distribution (clone and copy the skill folder).

@@ -16,7 +16,7 @@ The MCP server is a single Rust binary that communicates with AI clients (Claude
 
 ## Tool Layers
 
-Up to 15 tools are organized into 5 layers. The 12 core tools are always available; 3 additional Open Scheduling tools are available in Platform Mode. Agents work top-down: discover users, orient in time, then query calendars, then book.
+Up to 18 tools are organized into 5 layers. The 15 core tools are always available; 3 additional Open Scheduling tools are available in Platform Mode. Agents work top-down: discover users, orient in time, then query calendars, then book.
 
 ```
 Layer 4: Booking          [book_slot, request_booking*]                      — Safe mutation
@@ -149,4 +149,4 @@ Per MCP 2025-11-25 spec. The server listens on `http://{HTTP_HOST}:{HTTP_PORT}/m
 
 ## MCP Protocol
 
-The server implements the [Model Context Protocol](https://modelcontextprotocol.io/) specification using the rmcp Rust crate. It registers up to 15 tools with JSON Schema parameter definitions that MCP clients use for tool calling. In Local Mode, 12 core tools are registered. In Platform Mode, 3 additional Open Scheduling tools (`resolve_identity`, `query_public_availability`, `request_booking`) are conditionally registered, bringing the total to 15.
+The server implements the [Model Context Protocol](https://modelcontextprotocol.io/) specification using the rmcp Rust crate. It registers up to 18 tools with JSON Schema parameter definitions that MCP clients use for tool calling. In Local Mode, 15 core tools are registered. In Platform Mode, 3 additional Open Scheduling tools (`resolve_identity`, `query_public_availability`, `request_booking`) are conditionally registered, bringing the total to 18.

@@ -1,6 +1,6 @@
 # Tool Reference
 
-Complete reference for the up to 15 MCP tools provided by `@temporal-cortex/cortex-mcp`. The 12 core tools are always available; 3 additional Open Scheduling tools are available in Platform Mode.
+Complete reference for the up to 18 MCP tools provided by `@temporal-cortex/cortex-mcp`. The 15 core tools are always available; 3 additional Open Scheduling tools are available in Platform Mode.
 
 All datetime parameters use [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339) format (e.g., `2026-03-15T14:00:00Z` or `2026-03-15T10:00:00-04:00`).
 

@@ -183,7 +183,7 @@ Active when `REDIS_URLS` is **not** set.
 
 - In-memory lock manager (single-process safety)
 - Local file credential storage (`~/.config/temporal-cortex/`)
-- All 15 tools available
+- All 18 tools available
 - No external infrastructure required
 
 ### Platform Mode

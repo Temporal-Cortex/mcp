@@ -208,4 +208,4 @@ Or install the [Temporal Cortex Agent Skills](https://github.com/temporal-cortex
 - [Google Calendar Setup](google-cloud-setup.md) — detailed Google OAuth walkthrough
 - [Outlook Setup](outlook-setup.md) — Azure AD app registration
 - [CalDAV Setup](caldav-setup.md) — iCloud, Fastmail, and custom CalDAV servers
-- [Tool Reference](tools.md) — full input/output schemas for all 15 tools
+- [Tool Reference](tools.md) — full input/output schemas for all 18 tools
