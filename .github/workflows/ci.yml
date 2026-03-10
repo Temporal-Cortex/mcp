@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     branches: [main]
-    paths: ['**.md', '**.yml', '**.yaml', '**.json']
+    paths: ['**.md', '**.yml', '**.yaml', '**.json', 'Dockerfile']
   pull_request:
     branches: [main]
   schedule:
@@ -25,3 +25,83 @@ jobs:
           config-file: '.github/markdown-link-check-config.json'
           use-quiet-mode: 'yes'
           folder-path: '.'
+
+  validate-json:
+    name: Validate JSON & YAML
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Validate server.json
+        run: python3 -c "import json; json.load(open('.mcp/server.json')); print('✓ .mcp/server.json')"
+
+      - name: Validate glama.json
+        run: python3 -c "import json; json.load(open('glama.json')); print('✓ glama.json')"
+
+      - name: Validate smithery.yaml
+        run: |
+          pip3 install --quiet pyyaml
+          python3 -c "import yaml; yaml.safe_load(open('smithery.yaml')); print('✓ smithery.yaml')"
+
+      - name: Validate example configs
+        run: |
+          for f in examples/*.json; do
+            python3 -c "import json; json.load(open('$f')); print('✓ $f')"
+          done
+
+  version-sync:
+    name: Check Version Sync
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Extract and compare versions
+        run: |
+          set -euo pipefail
+
+          SERVER_JSON_VER=$(python3 -c "import json; print(json.load(open('.mcp/server.json'))['version'])")
+          SERVER_JSON_PKG_VER=$(python3 -c "import json; print(json.load(open('.mcp/server.json'))['packages'][0]['version'])")
+          SMITHERY_VER=$(grep -oP '@temporal-cortex/cortex-mcp@\K[0-9]+\.[0-9]+\.[0-9]+' smithery.yaml)
+          DOCKERFILE_VER=$(grep -oP '@temporal-cortex/cortex-mcp@\K[0-9]+\.[0-9]+\.[0-9]+' Dockerfile)
+          README_VER=$(grep -oP '\*\*v\K[0-9]+\.[0-9]+\.[0-9]+' README.md | head -1)
+
+          echo "server.json version:         $SERVER_JSON_VER"
+          echo "server.json package version: $SERVER_JSON_PKG_VER"
+          echo "smithery.yaml version:       $SMITHERY_VER"
+          echo "Dockerfile version:          $DOCKERFILE_VER"
+          echo "README.md version:           $README_VER"
+
+          ERRORS=0
+          if [ "$SERVER_JSON_VER" != "$SERVER_JSON_PKG_VER" ]; then
+            echo "::error::server.json version != package version"
+            ERRORS=$((ERRORS + 1))
+          fi
+          if [ "$SERVER_JSON_VER" != "$SMITHERY_VER" ]; then
+            echo "::error::server.json != smithery.yaml"
+            ERRORS=$((ERRORS + 1))
+          fi
+          if [ "$SERVER_JSON_VER" != "$DOCKERFILE_VER" ]; then
+            echo "::error::server.json != Dockerfile"
+            ERRORS=$((ERRORS + 1))
+          fi
+          if [ "$SERVER_JSON_VER" != "$README_VER" ]; then
+            echo "::error::server.json != README.md"
+            ERRORS=$((ERRORS + 1))
+          fi
+
+          if [ "$ERRORS" -gt 0 ]; then
+            exit 1
+          fi
+          echo "✓ All versions in sync: v$SERVER_JSON_VER"
+
+  docker-lint:
+    name: Lint Dockerfile
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Run hadolint
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: Dockerfile
+          failure-threshold: warning
