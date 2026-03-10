@@ -65,7 +65,7 @@ The open-core model works as a funnel: developers discover Truth Engine or TOON,
 ## README Alignment with Master Plan v1.7 (2026-02-21)
 
 - **What changed:** Pricing details removed from public README. "Going to Production?" replaced with "Ready for More?" section featuring three tiers (Managed Cloud Free, Open Scheduling Pro, Enterprise) with no dollar amounts. Free tier updated to v1.7 specs (3 calendars, 50 bookings/mo, 11 tools). Comparison table "Free (Lite)" changed to "Free".
-- **Why:** Public repos are not the place for pricing commitments pre-PMF. Anchoring to specific dollar amounts ($29/mo, $0.04/booking) before having paying users creates migration headaches and negotiation anchoring problems. Pricing lives in the master plan and will surface through the product UI when the managed tier ships.
+- **Why:** Public repos are not the place for pricing commitments pre-PMF. Anchoring to specific dollar amounts before having paying users creates migration headaches and negotiation anchoring problems. Pricing lives in the master plan and will surface through the product UI when the managed tier ships.
 - **Lesson:** Documentation debt compounds. The READMEs drifted through 7 master plan revisions without updates. Establishing a "docs follow strategy" discipline — every master plan version bump should trigger a README review.
 
 ## Docker Image for Directory Inspection (2026-02-22)
